@@ -59,8 +59,9 @@ url = 'http://apis.data.go.kr/1390802/SoilEnviron/SoilExam/getSoilExamList'
 decoding_key = 't8AvYGqeSITi2+gahkha6EK2mJWV35JR0ujirjhE08+zehJAVTDJeJDbocgW6CpEisnA85+U6H7gJqo9oCc1bA=='
 content = ''
 
-for i in bgd:
-    params ={'serviceKey' : decoding_key, 'Page_Size' : '10', 'Page_No' : '1', 'BJD_Code' : i[0] }
+
+for x in bgd:
+    params ={'serviceKey' : decoding_key, 'Page_Size' : '10', 'Page_No' : '1', 'BJD_Code' : 	x[0] }
     response = requests.get(url, params=params,verify=False)
     content += response.text
     print(content)
