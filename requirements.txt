@@ -70,3 +70,5 @@ wincertstore              0.2             py310haa95532_2
 xz                        5.2.10               h8cc25b3_1  
 zlib                      1.2.13               h8cc25b3_0  
 zstandard                 0.19.0          py310h2bbff1b_0  
+geopandas
+matplotlib

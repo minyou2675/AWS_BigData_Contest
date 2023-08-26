@@ -4,6 +4,7 @@ from os import name
 import xml.etree.ElementTree as et
 import pandas as pd
 import bs4
+from datetime import date
 from time import sleep
 from urllib.parse import urlencode, quote_plus, unquote
 
@@ -59,9 +60,11 @@ url = 'http://apis.data.go.kr/1390802/SoilEnviron/SoilExam/getSoilExamList'
 decoding_key = 't8AvYGqeSITi2+gahkha6EK2mJWV35JR0ujirjhE08+zehJAVTDJeJDbocgW6CpEisnA85+U6H7gJqo9oCc1bA=='
 content = ''
 
+#매일 100건 제한있으므로 index 연산
+idx = (date.today().day - 5) * 100
 
-for x in bgd:
-    params ={'serviceKey' : decoding_key, 'Page_Size' : '10', 'Page_No' : '1', 'BJD_Code' : 	x[0] }
+for x in range(idx-100,idx):
+    params ={'serviceKey' : decoding_key, 'Page_Size' : '10', 'Page_No' : '1', 'BJD_Code' : bgd[x][0] }
     response = requests.get(url, params=params,verify=False)
     content += response.text
     print(content)
@@ -86,6 +89,8 @@ for i in range(0,len(rows)):
     value_list = []
 
 df = pd.DataFrame(row_list,columns=column_list)
+
+df.csv
 print(df)
 
 
