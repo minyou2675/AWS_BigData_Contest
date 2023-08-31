@@ -162,3 +162,4 @@ cython_debug/
 #데이터 파일들
 *.zip
 data/
+*.csv
