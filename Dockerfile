@@ -13,3 +13,6 @@ RUN pip install --upgrade pip
 # RUN pip install -r requirements.txt
 RUN pip install flask
 RUN pip install gunicorn
+RUN pip install pandas
+RUN pip install boto3
+

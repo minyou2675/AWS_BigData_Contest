@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <link rel="stylesheet" href=" {{ url_for('static', filename='css/info.css') }}">
+      </head>
+    <body>
+        <div id="back">
+            <input type="button" id="mainBtn" value="메인화면" onclick="location.href='/map'" />
+            <div id="center">
+        
+        <h1 style="margin-left: 24rem;" >충청남도 {{param['sgg_nm']}} {{param['emd_nm']}}<h1>
+        
+            
+         <div class="block">  
+        <p>💊 의료시설 수 : {{param['hospital']}}개 (읍면동 {{param['emd_total']}}개 중에서 {{param['hospital_rank']}}등)</p>
+        <div class="infraList">
+        {% if param['speciality']['의료병원'] %}
+        <p>😊병원이 충분해서 안심이에요({{param['speciality_cnt']['의료병원']}}개)</p>
+        {% else %}
+        <p>😥병원이 부족해요({{param['speciality_cnt']['의료병원']}}개)</p>
+        {% endif %}
+        {% if param['speciality']['의료의원'] %}
+        <p>😊가벼운 진료를 위한 의원들이 주변에 있어요({{param['speciality_cnt']['의료의원']}}개)</p>
+        {% else %}
+        <p>😥이곳엔 동네의원이 별로 없네요({{param['speciality_cnt']['의료의원']}}개)</p>
+        {% endif %}
+    </div>
+        
+        <p>🏪 상업시설 수 : {{param['commercial']}}개 (읍면동 {{param['emd_total']}}개 중에서 {{param['commercial_rank']}}등)</p>
+        <div class="infraList">
+        {% if param['speciality']['상업생활밀착형상업시설'] %}
+        <p>😊근처 편의점이나 동네마트 가기 좋은 곳이에요!({{param['speciality_cnt']['상업생활밀착형상업시설']}}개)</p>
+        {% else %}
+        <p>😥상가가 부족해요, 잠깐 뭐 사러 나가기 힘든 곳이에요({{param['speciality_cnt']['상업생활밀착형상업시설']}}개)</p>
+        {% endif %}
+
+        {% if param['speciality']['상업대규모복합상가'] %}
+        <p>😊백화점이나 대형마트가 많아 장보러 다니기 좋은 동네네요!({{param['speciality_cnt']['상업대규모복합상가']}}개)</p>
+        {% else %}
+        <p>😥백화점이나 대형마트 가려면 옆동네로...({{param['speciality_cnt']['상업대규모복합상가']}}개)</p>
+        {% endif %}
+        </div>
+        
+        <p>📚 교육시설 수 : {{param['education']}}개 (읍면동 {{param['emd_total']}}개 중에서 {{param['education_rank']}}등)</p>
+        <div class="infraList">
+        {%if param['speciality']['교육유치원'] %}
+        <p>   😊유치원이 많아요~ 아이 키우기 좋은 곳({{param['speciality_cnt']['교육유치원']}}개)</p>
+        {% else %}
+        <p>   😥유치원을 찾기 힘든 곳이에요({{param['speciality_cnt']['교육유치원']}}개)</p>
+        {% endif %}
+        {%if param['speciality']['교육초중등학교'] %}
+        <p>   😊자녀가 있다면 학교 보내기 좋은 곳이에요({{param['speciality_cnt']['교육초중등학교']}}개)</p>
+        {% else %}
+        <p>   😥근처에 학교가 부족해요 ㅠㅠ({{param['speciality_cnt']['교육초중등학교']}}개)</p>
+        {% endif %}
+        </div class="infraList">
+        
+        <p>👨‍👩‍👧‍👦 복지시설 수 : {{param['wellfare']}}개 (읍면동 {{param['emd_total']}}개 중에서 {{param['wellfare_rank']}}등)</p>
+        <div class="infraList">
+            {%if param['speciality']['복지노인복지시설'] %}
+            <p>   😊노후에 보내기 좋은 곳, 노인복지시설이 잘 되어있어요!({{param['speciality_cnt']['복지노인복지시설']}}개)</p>
+            {% else %}
+            <p>   😥노인을 위한 복지시설이 부족해요({{param['speciality_cnt']['복지노인복지시설']}}개)</p>
+            {% endif %}
+            {%if param['speciality']['복지장애인복지시설'] %}
+            <p>   😊장애인을 위한 복지시설이 잘 되어 있는 곳!({{param['speciality_cnt']['복지장애인복지시설']}}개)</p>
+            {% else %}
+            <p>   😥장애인을 위한 복지시설이 부족해요({{param['speciality_cnt']['복지장애인복지시설']}}개)</p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- <div class="prgress-block">
+    <p>{{param['emd_nm']}}의 인프라 수준은</p>
+    <div class="progress-bar">          
+        <div class="progress"> 
+        </div>
+     </div> 
+     <p>상위 {{param['average_rank']}}% 입니다.</p>
+    </div> -->
+
+        <!-- <p>{{param['sgg_nm']}}의 인구수 대비 인프라수는 충청남도에서 {{param['infra_rank']}}등 입니다.</p> -->
+
+        <h1 style="margin-left: 24rem;">최신 귀농 귀촌 지원사업</h1>
+        <div class='section'>
+        
+        {% for key, value in param['crawling_dict'].items()%}
+        <div class="block2">
+                
+            <span >{{value[0]}}</span>
+            <p>{{value[1]}}</p>
+            <p>{{value[2]}}</p>
+        </div>
+        {% endfor %}
+    
+    </div>
+
+    <h1 style="margin-left: 24rem">충청남도 농산물 현황</h1>
+    <iframe width="700" height="600" src="https://ap-northeast-2.quicksight.aws.amazon.com/sn/embed/share/accounts/629515838455/dashboards/c2ec58bc-d639-4019-9a07-90b5fd7ecdd8/sheets/c2ec58bc-d639-4019-9a07-90b5fd7ecdd8_39c03673-c379-4e80-a34e-c8d6b685b230/visuals/c2ec58bc-d639-4019-9a07-90b5fd7ecdd8_5dbe95be-136e-4bfd-b6f0-d5e0480932cc?directory_alias=fiveworks"></iframe>           
+    </div>
+    </div>
+    </body>
+</html>
+
+<script>
+    var progressBar = document.getElementsByClassName('progress');
+    progressBar.width = 100-`{{param[average_rank]}}`;
+</script>
